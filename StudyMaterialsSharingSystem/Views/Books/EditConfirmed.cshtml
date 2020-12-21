@@ -1,0 +1,77 @@
+﻿@model StudyMaterialsSharingSystem.Models.BookViewModels.BookInfoViewModel2
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body px-0 pb-0 pt-5">
+            <div class="text-center">
+                <h4 class="text-center">Book Information</h4>
+            </div>
+            <form asp-action="EditConfirmed" enctype="multipart/form-data">
+                <input type="hidden" asp-for="BookInfo.SubCategoryID" />
+                <input type="hidden" asp-for="BookInfo.BookID" />
+                <input type="hidden" asp-for="BookInfo.BookName" />
+                <input type="hidden" asp-for="BookInfo.Condition" />
+                <input type="hidden" asp-for="BookInfo.Price" />
+                <input type="hidden" asp-for="BookInfo.PriceType" />
+                <input type="hidden" asp-for="BookInfo.Description" />
+                <input type="hidden" asp-for="OwnerID" />
+                <input type="hidden" asp-for="ImagePath" />
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="px-5 pb-5">
+                            <div class="form-group">
+                                <div class="col-md-6 mx-auto d-block">
+                                    <img src=@Url.Content(Model.ImagePath) alt="Generic placeholder image" class="img-fluid" id="imagePreview" style="width:231px;height:146px" />
+                                    <p>Upload one Image</p>
+                                    <div class="custom-file">
+                                        <input type="file" asp-for="ImageUoload" class="custom-file-input" id="customFile" accept=".jpeg, .png, .jpg" onchange="ShowImagePreview(this, document.getElementById('imagePreview'))" />
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                        <span asp-validation-for="ImageUoload" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="px-5 pb-5">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="Enter EmailAddress" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone" class="control-label"></label>
+                                <input asp-for="Phone" class="form-control" placeholder="Enter Contact Phone No." />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Location" class="control-label"></label>
+                                <input asp-for="Location" class="form-control" placeholder="Enter Loaction" />
+                                <span asp-validation-for="Location" class="text-danger"></span>
+                            </div>
+                            <div class="form-group float-right">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+

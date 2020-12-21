@@ -1,0 +1,104 @@
+﻿@model StudyMaterialsSharingSystem.Models.BookViewModels.BookInfoViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-7 mx-auto d-block">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-center">Book Information</h4>
+                        </div>
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="BookID" />
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="CategoryID" class="control-label"></label>
+                                    <select asp-for="CategoryID" class="form-control" id="CategoryID" asp-items="ViewBag.CategoryID">
+                                        <option value="">Select</option>
+                                    </select>
+                                    <span asp-validation-for="CategoryID" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="SubCategoryID" class="control-label"></label>
+                                    <select asp-for="SubCategoryID" class="form-control" id="SubCategoryID" asp-items="ViewBag.SubCategoryID"></select>
+                                    <span asp-validation-for="SubCategoryID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BookName" class="control-label"></label>
+                                <input asp-for="BookName" class="form-control" placeholder="Enter Book Name" />
+                                <span asp-validation-for="BookName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="Condition" class="control-label"></label>
+                                    </br>
+                                    <div class="form-check ml-3">
+                                        <input asp-for="Condition" type="radio" class="form-check-input" value="Old" />
+                                        <label class="form-check-label">Old</label>
+                                    </div>
+                                    <div class="form-check ml-3">
+                                        <input asp-for="Condition" type="radio" class="form-check-input" value="New" />
+                                        <label class="form-check-label">New</label>
+                                    </div>
+                                    <span asp-validation-for="Condition" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="Price" class="control-label"></label>
+                                    <input asp-for="Price" class="form-control" placeholder="Enter Price" />
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                                    <div class="form-group">
+                                        <input asp-for="PriceType" type="checkbox" value="Fixed" />
+                                        <label> Fixed</label>
+                                        <input asp-for="PriceType" type="hidden" value="Not Fixed" />
+                                        <span asp-validation-for="PriceType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control" rows="5" placeholder="Write something about Book"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group float-right">
+                                <input type="submit" value="Next" class="btn btn-primary" />
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="MyBooks">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+         //Cascading DropDownList using jQuery
+    $(document).ready(function () {
+        $("#CategoryID").change(function () {
+            var url = '@Url.Content("~/")' + "Books/getSubCategory";
+            var ddlsource = "#CategoryID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#SubCategoryID").html(items);
+            })
+          });
+        });
+    </script>
+}

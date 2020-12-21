@@ -1,0 +1,51 @@
+﻿@model StudyMaterialsSharingSystem.Models.Document
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 mx-auto d-block">
+                    <div class="p-5">
+                        <a target="_blank" href="@Url.Content(Model.ImagePath)">
+                            <img class="img-fluid" src=@Url.Content(Model.ImagePath) alt="Book">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.DocumentName)</h3>
+                        <span> <i class="far fa-clock"></i> @Html.DisplayFor(model => model.AdTime)</span>
+                        <hr>
+                        <div class="item-property">
+                            <p class="price-detail-wrap">
+                                <span class="price h5 text-warning">
+                                    <span class="currency"> @Html.DisplayFor(model => model.DocumentFormat)</span>
+                                </span>
+                            </p> <!-- price-detail-wrap .// -->
+                        </div>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <div class="float-right p-2">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="DocumentID" />
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"> Delete</i></button>
+                            </form>
+                        </div>
+                    </div> <!-- row.// -->
+                </div> <!-- card.// -->
+            </div>
+        </div> <!-- row.// -->
+    </div>
+</div> <!--container.//-->

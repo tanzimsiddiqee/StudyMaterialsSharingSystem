@@ -1,0 +1,68 @@
+﻿@model StudyMaterialsSharingSystem.Models.SoftwareViewModels.SoftwareInfoViewModel2
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body px-0 pb-0 pt-5">
+            <div class="text-center">
+                <h4 class="text-center">Sofware Information</h4>
+            </div>
+            <form asp-action="EditConfirmed" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="SoftwareInfo.SoftwareTypeID" />
+                <input type="hidden" asp-for="SoftwareInfo.SoftwareID" />
+                <input type="hidden" asp-for="SoftwareInfo.SoftwareName" />
+                <input type="hidden" asp-for="SoftwareInfo.Version" />
+                <input type="hidden" asp-for="SoftwareInfo.Description" />
+                <input type="hidden" asp-for="OwnerID" />
+                <input type="hidden" asp-for="ImagePath" />
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="px-5 pb-5">
+                            <div class="form-group">
+                                <div class="col-md-6 mx-auto d-block">
+                                    <img src=@Url.Content(Model.ImagePath) alt="Generic placeholder image" class="img-fluid" id="imagePreview" style="width:231px;height:146px" />
+                                    <p>Upload one Image</p>
+                                    <div class="custom-file">
+                                        <input type="file" asp-for="ImageUoload" class="custom-file-input" id="customFile" accept=".jpeg, .png, .jpg" onchange="ShowImagePreview(this, document.getElementById('imagePreview'))" />
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                        <span asp-validation-for="ImageUoload" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="px-5 pb-5">
+                            <div class="form-group">
+                                <label asp-for="DownloadAddress" class="control-label"></label>
+                                <input asp-for="DownloadAddress" class="form-control" placeholder="https://wwww.demo.com" />
+                                <span asp-validation-for="DownloadAddress" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DownloadingProcess" class="control-label"></label>
+                                <textarea asp-for="DownloadingProcess" class="form-control" rows="5" placeholder="Write something Details"></textarea>
+                                <span asp-validation-for="DownloadingProcess" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="InstallingProcess" class="control-label"></label>
+                                <textarea asp-for="InstallingProcess" class="form-control" rows="5" placeholder="Write something Details"></textarea>
+                                <span asp-validation-for="InstallingProcess" class="text-danger"></span>
+                            </div>
+                            <div class="form-group float-right">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

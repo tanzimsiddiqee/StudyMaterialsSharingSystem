@@ -1,0 +1,78 @@
+﻿@model StudyMaterialsSharingSystem.Models.Book
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 mx-auto d-block">
+                    <div class="p-5">
+                        <a target="_blank" href="@Url.Content(Model.ImagePath)">
+                            <img class="img-fluid" src=@Url.Content(Model.ImagePath) alt="Book">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.BookName)</h3>
+                        <span> <i class="far fa-clock"></i> @Html.DisplayFor(model => model.AdTime)</span>
+                        <div class="row pt-2">
+                            <div class="col-sm-5">
+                                <p class="price-detail-wrap">
+                                    <span class="price h5 text-warning">
+                                        <span class="currency">BDT </span><span class="num"> @Html.DisplayFor(model => model.Price)</span> <span class="currency"> ৳</span>
+                                    </span>
+                                    <span>  (@Html.DisplayFor(model => model.PriceType))</span>
+                                </p> <!-- price-detail-wrap .// -->
+                            </div> <!-- col.// -->
+                            <div class="col-sm-4">
+                                <p class="price-detail-wrap">
+                                    <span class="price font-weight-bold">
+                                        <span>@Html.DisplayNameFor(model => model.Condition) : </span>
+                                    </span>
+                                    <span>@Html.DisplayFor(model => model.Condition)</span>
+                                </p> <!-- price-detail-wrap .// -->
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.SubCategory.Category)</dt>
+                            <dd>
+                                <p>
+                                <p>
+                                    @Html.DisplayFor(model => model.SubCategory.Category.CategoryName)-> @Html.DisplayFor(model => model.SubCategory.SubCategoryName)
+                                </p>
+                                </p>
+                            </dd>
+                        </dl>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="param param-feature">
+                            <dt>Contact Information</dt>
+                            <dd>@Html.DisplayNameFor(model => model.Location) : @Html.DisplayFor(model => model.Location)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => model.Email)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Phone) : @Html.DisplayFor(model => model.Phone)</dd>
+                        </dl>
+                        <hr>
+                        <div class="float-right px-3 pb-3">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="BookID" />
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"> Delete</i></button>
+                            </form>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- card.// -->
+        </div>
+    </div> <!-- row.// -->
+</div>

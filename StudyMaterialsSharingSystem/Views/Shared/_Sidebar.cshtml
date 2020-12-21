@@ -1,0 +1,137 @@
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <li class="nav-item">
+        <a asp-controller="Home" asp-action="Index" class="sidebar-brand d-flex align-items-center justify-content-center">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">SMSS</div>
+        </a>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        <!-- Nav Item - Dashboard -->
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Home</span>
+        </a>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    </li>
+    <!-- Heading -->
+    <li class="nav-item">
+        <div class="sidebar-heading">
+            Menu Bar
+        </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+    </li>
+    <!-- Nav Item -Materials Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Materials</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Materials List:</h6>
+                <a class="collapse-item" asp-area="" asp-controller="Book" asp-action="Index">
+                    <i class="fas fa-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Books
+                </a>
+                <a class="collapse-item" asp-area="" asp-controller="Houses" asp-action="Index">
+                    <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Houses
+                </a>
+                <a class="collapse-item" asp-area="" asp-controller="Documents" asp-action="Index">
+                    <i class="fas fa-file-pdf fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Documents
+                </a>
+                <a class="collapse-item" asp-area="" asp-controller="Softwares" asp-action="Index">
+                    <i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Software
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Share Your Materials</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Material:</h6>
+                <a class="collapse-item" asp-area="" asp-controller="Books" asp-action="Add">
+                    <i class="fas fa-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Add Book
+                </a>
+                <a class="collapse-item" asp-area="" asp-controller="Documents" asp-action="Add">
+                    <i class="fas fa-file-pdf fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Add Documents
+                </a>
+                <a class="collapse-item" asp-area="" asp-controller="Houses" asp-action="Add">
+                    <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Add To-let
+                </a>
+            </div>
+        </div>
+    </li>
+    <!-- Divider -->
+    <li class="nav-item">
+        <hr class="sidebar-divider">
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Action
+        </div>
+    </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#feedback">
+            <i class="fas fa-fw fa-smile"></i>
+            <span>Give Feedback</span>
+        </a>
+        <!-- The Modal -->
+        <div class="modal fade" id="feedback">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form asp-controller="Home" asp-action="Feedback">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Give Feedback</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" type ="email" name="email" placeholder="Email Address" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">FeedBack</label>
+                                <textarea class="form-control" type ="email" name="message" placeholder="Write something" required></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary ml-1" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary mr-1">Sent</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <hr class="sidebar-divider d-none d-md-block">
+    </li>
+    <!-- Sidebar Toggler (Sidebar) -->
+    <li class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </li>
+</ul>
+<!-- End of Sidebar -->

@@ -1,0 +1,147 @@
+﻿@model StudyMaterialsSharingSystem.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 mx-auto d-block">
+                    <div class="p-5">
+                        <a target="_blank" href="@Url.Content(Model.ImagePath)">
+                            <img class="img-fluid" src=@Url.Content(Model.ImagePath) alt="Book">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="float-right pl-1">
+                            @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Update)).Succeeded)
+                            {
+                                <a asp-action="Edit" asp-route-id="@Model.BookID" class=" btn btn-outline-info rounded-circle p-1"><i class="far fa-edit"></i></a>
+                            }
+                            @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Delete)).Succeeded)
+                            {
+                                <a asp-action="Delete" asp-route-id="@Model.BookID" class="btn btn-outline-danger rounded-circle p-1"><i class="fas fa-trash-alt"></i></a>
+                            }
+                        </div>
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.BookName)</h3>
+                        <span> <i class="far fa-clock"></i> @Html.DisplayFor(model => model.AdTime)</span>
+                        <div class="row pt-2">
+                            <div class="col-sm-5">
+                                <p class="price-detail-wrap">
+                                    <span class="price h5 text-warning">
+                                        <span class="currency">BDT </span><span class="num"> @Html.DisplayFor(model => model.Price)</span> <span class="currency"> ৳</span>
+                                    </span>
+                                    <span>  (@Html.DisplayFor(model => model.PriceType))</span>
+                                </p> <!-- price-detail-wrap .// -->
+                            </div> <!-- col.// -->
+                            <div class="col-sm-4">
+                                <p class="price-detail-wrap">
+                                    <span class="price font-weight-bold">
+                                        <span>@Html.DisplayNameFor(model => model.Condition) : </span>
+                                    </span>
+                                    <span>@Html.DisplayFor(model => model.Condition)</span>
+                                </p> <!-- price-detail-wrap .// -->
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.SubCategory.Category)</dt>
+                            <dd>
+                                <p>
+                                <p>
+                                    @Html.DisplayFor(model => model.SubCategory.Category.CategoryName)-> @Html.DisplayFor(model => model.SubCategory.SubCategoryName)
+                                </p>
+                            </dd>
+                        </dl>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="param param-feature">
+                            <dt>Contact Information</dt>
+                            <dd>@Html.DisplayNameFor(model => model.Location) : @Html.DisplayFor(model => model.Location)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => model.Email)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Phone) : @Html.DisplayFor(model => model.Phone)</dd>
+                        </dl>
+                        <hr>
+                        <div class="item-property">
+                            <button type="button" class="btn btn-lg btn-outline-info" data-toggle="modal" data-target="#myModal">
+                                <i class="far fa-envelope"> Request</i>
+                            </button>
+
+                            <!-- The Modal -->
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form asp-action="Sent" asp-route-id="@Model.BookID" asp-route-receiver="@Model.OwnerID">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Sent Request</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="control-label">Message</label>
+                                                    <textarea class="form-control" name="Message" placeholder="Write something" required></textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary ml-1" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary mr-1">Sent</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- card.// -->
+        </div>
+    </div> <!-- row.// -->
+ </div>
+<!--container.//-->
+<div class="card-footer text-center">
+    <div class="list-group-item-action">
+        @if (Model.Status != BookStatus.Approved)
+        {
+            @if ((await AuthorizationService.AuthorizeAsync(
+ User, Model, Operations.Approve)).Succeeded)
+            {
+                <form style="display:inline;" method="post">
+                    <input type="hidden" name="id" value="@Model.BookID" />
+                    <input type="hidden" name="status" value="@BookStatus.Approved" />
+                    <button type="submit" class="btn btn-xs btn-outline-success  py-1">Approve</button>
+                </form>
+                <text> | </text>
+            }
+        }
+
+        @if (Model.Status != BookStatus.Rejected)
+        {
+            @if ((await AuthorizationService.AuthorizeAsync(
+ User, Model, Operations.Reject)).Succeeded)
+            {
+                <form style="display:inline;" method="post">
+                    <input type="hidden" name="id" value="@Model.BookID" />
+                    <input type="hidden" name="status" value="@BookStatus.Rejected" />
+                    <button type="submit" class="btn btn-xs btn-outline-warning  py-1">Reject</button>
+                </form>
+                <text> | </text>
+            }
+        }
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

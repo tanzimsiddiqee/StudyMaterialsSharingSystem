@@ -1,0 +1,69 @@
+﻿@model StudyMaterialsSharingSystem.Models.DocViewModels.DocInfoViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-7 mx-auto d-block">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-center">Document Information</h4>
+                        </div>
+                        <form asp-action="Add">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="DocumentName" class="control-label"></label>
+                                    <input asp-for="DocumentName" class="form-control" placeholder="Document Name" />
+                                    <span asp-validation-for="DocumentName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DocumentFormat" class="control-label"></label>
+                                    </br>
+                                    <div class="form-check form-check-inline">
+                                        <input asp-for="DocumentFormat" type="radio" class="form-check-input" value="PDF" />
+                                        <label class="form-check-label">PDF</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input asp-for="DocumentFormat" type="radio" class="form-check-input" value="DOC" />
+                                        <label class="form-check-label">DOC</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input asp-for="DocumentFormat" type="radio" class="form-check-input" value="PPT/PPTX" />
+                                        <label class="form-check-label">PPT/PPTX</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input asp-for="DocumentFormat" type="radio" class="form-check-input" value="OTHERS" />
+                                        <label class="form-check-label">OTHERS</label>
+                                    </div>
+                                    <span asp-validation-for="DocumentFormat" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DownloadAddress" class="control-label"></label>
+                                    <input asp-for="DownloadAddress" class="form-control" placeholder="https://wwww.demo.com" />
+                                    <span asp-validation-for="DownloadAddress" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <textarea asp-for="Description" class="form-control form-control-user" rows="5" placeholder="Write something about Book"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group float-right">
+                                    <input type="submit" value="Save" class="btn btn-primary" />
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

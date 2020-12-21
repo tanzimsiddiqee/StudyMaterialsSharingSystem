@@ -1,0 +1,227 @@
+﻿@model StudyMaterialsSharingSystem.Models.HomeViewModels.SearchViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="font-weight-normal text-primary mb-2">You are seaching for "@ViewData["CurrentFilter"]". Result (@ViewBag.tCount)</div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item pr-3">
+                <a class="nav-link active" data-toggle="tab" href="#Books">
+                    Books
+                    <span class="badge badge-danger badge-counter">@ViewBag.bCount</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Documents">
+                    Documents
+                    <span class="badge badge-danger badge-counter">@ViewBag.dCount</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Softwares">
+                    Softwares
+                    <span class="badge badge-danger badge-counter">@ViewBag.sCount</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Houses">
+                    Houses
+                    <span class="badge badge-danger badge-counter">@ViewBag.hCount</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="Books" class="container tab-pane active">
+                <!-- Three columns of text below the carousel -->
+                <div class="row">
+                    @foreach (var item in Model.Books)
+                    {<div class="col-lg-3 col-md-5 col-sm-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <a asp-action="Details" asp-route-id="@item.BookID" class="btn btn-link p-0">
+                                        <h6 class="m-0 font-weight-bold text-primary">@item.BookName</h6>
+                                    </a>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Action</div>
+                                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@item.BookID" class="dropdown-item">Edit</a>
+                                            }
+
+                                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Delete)).Succeeded)
+                                            {
+                                                <a asp-action="Delete" asp-route-id="@item.BookID" class="dropdown-item">Delete</a>
+                                            }
+
+                                            @*<div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Report</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body pt-3">
+                                    <img class="mx-auto d-block" src=@Url.Content(item.ImagePath) alt="Book" width="174" height="120">
+                                    <div class="mt-2 text-center small">
+                                        <div class="card-text text-lg-center">Category : @item.SubCategory.Category.CategoryName>>@item.SubCategory.SubCategoryName</div>
+                                        <div class="card-text text-lg-center text-info"> Condition : @item.Condition</div>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Price : @item.Price
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div id="Documents" class="container tab-pane fade">
+                    <!-- Three columns of text below the carousel -->
+                <div class="row">
+                    @foreach (var item in Model.Documents)
+                    {<div class="col-lg-3 col-md-5 col-sm-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <a asp-action="Details" asp-route-id="@item.DocumentID" class="btn btn-link p-0">
+                                        <h6 class="m-0 font-weight-bold text-primary">@item.DocumentName</h6>
+                                    </a>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Action</div>
+                                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@item.DocumentID" class="dropdown-item">Edit</a>
+                                            }
+
+                                            @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Delete)).Succeeded)
+                                            {
+                                                <a asp-action="Delete" asp-route-id="@item.DocumentID" class="dropdown-item">Delete</a>
+                                            }
+
+                                            @*<div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Report</a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body pt-1">
+                                    <img class="mx-auto d-block" src=@Url.Content(item.ImagePath) alt="Book" style="max-width:284px;max-height:136px">
+                                    <div class="mt-2 text-center small">
+                                        <div class="card-text text-lg-center text-info">Format : @item.DocumentFormat</div>
+                                        <span>
+                                            <i class="fas fa-clock text-info"></i> @item.AdTime
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                 </div>
+            </div>
+            <div id="Softwares" class="container tab-pane fade">
+                    <!-- Three columns of text below the carousel -->
+                    <div class="row">
+                        @foreach (var item in Model.Softwares)
+                        {<div class="col-lg-3 col-md-5 col-sm-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <a asp-action="Details" asp-route-id="@item.SoftwareID" class="btn btn-link p-0">
+                                            <h6 class="m-0 font-weight-bold text-primary">@item.SoftwareName</h6>
+                                        </a>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Action</div>
+                                                @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.SoftwareID" class="dropdown-item">Edit</a>
+                                                }
+
+                                                @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Delete)).Succeeded)
+                                                {
+                                                    <a asp-action="Delete" asp-route-id="@item.SoftwareID" class="dropdown-item">Delete</a>
+                                                }
+
+                                                @*<div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Report</a>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <img class="rounded-circle  mx-auto d-block" src=@Url.Content(item.ImagePath) alt="Book" width="70" height="70">
+                                        <div class="mt-4 text-center small">
+                                            <div class="card-text text-lg-center text-info">Category : @item.SoftwareType.TypeName</div>
+                                            <div class="card-text text-lg-center text-info">Version : @item.Version</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+            </div>
+            <div id="Houses" class="container tab-pane fade">
+                    <!-- Three columns of text below the carousel -->
+                    <div class="row">
+                        @foreach (var item in Model.Houses)
+                        {<div class="col-lg-3 col-md-5 col-sm-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <a asp-action="Details" asp-route-id="@item.HouseID" class="btn btn-link p-0">
+                                            <h6 class="m-0 font-weight-bold text-primary">@item.HouseName</h6>
+                                        </a>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Action</div>
+                                                @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.HouseID" class="dropdown-item">Edit</a>
+                                                }
+
+                                                @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Delete)).Succeeded)
+                                                {
+                                                    <a asp-action="Delete" asp-route-id="@item.HouseID" class="dropdown-item">Delete</a>
+                                                }
+
+                                                @*<div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Report</a>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <img class="mx-auto d-block" src=@Url.Content(item.ImagePath) alt="Book" width="174" height="120">
+                                        <div class="mt-2 text-center small">
+                                            <div class="card-text text-lg-center text-info">Category : @item.Category</div>
+                                            <div class="card-text text-lg-center text-info">For : @item.HouseType</div>
+                                            <div class="card-text text-lg-center text-info">Location : @item.Location</div>
+                                            <span>
+                                                <i class="fas fa-clock text-info"></i> From: @item.dateTime
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+            </div>
+        </div>
+    </div>

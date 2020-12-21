@@ -1,0 +1,116 @@
+﻿@model StudyMaterialsSharingSystem.Models.HouseViewModels.HouseInfoViewModel2
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body px-0 pb-0 pt-5">
+            <div class="text-center">
+                <h4 class="text-center">House Information</h4>
+            </div>
+            <form asp-action="EditConfirmed" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="HouseInfo.HouseID" />
+                <input type="hidden" asp-for="HouseInfo.Category" />
+                <input type="hidden" asp-for="HouseInfo.HouseType" />
+                <input type="hidden" asp-for="HouseInfo.Location" />
+                <input type="hidden" asp-for="HouseInfo.dateTime" />
+                <input type="hidden" asp-for="HouseInfo.AvailableSeat" />
+                <input type="hidden" asp-for="HouseInfo.AvailableRoom" />
+                <input type="hidden" asp-for="HouseInfo.RentPerSeat" />
+                <input type="hidden" asp-for="HouseInfo.RentPerRoom" />
+                <input type="hidden" asp-for="HouseInfo.ServiceCharge" />
+                <input type="hidden" asp-for="OwnerID" />
+                <input type="hidden" asp-for="ImagePath" />
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="px-5">
+                            <div class="form-group">
+                                <div class="col-md-6 mx-auto d-block">
+                                    <img src=@Url.Content(Model.ImagePath) alt="Generic placeholder image" class="img-fluid" id="imagePreview" style="width:231px;height:146px" />
+                                </div>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" asp-for="ImageUoload" class="custom-file-input" id="customFile" accept=".jpeg, .png, .jpg" onchange="ShowImagePreview(this, document.getElementById('imagePreview'))" />
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <span asp-validation-for="ImageUoload" class="text-danger"></span>
+                            </div>
+                            <div class="form-group pt-2">
+                                <label asp-for="Facilities" class="control-label"></label>
+                                <input asp-for="Facilities" class="form-control" placeholder="Select Checkbox" id="show" readonly /> <br>
+                                <span asp-validation-for="Facilities" class="text-danger"></span>
+                                <div class="form-check ml-3">
+                                    <input type="checkbox" class="form-check-input" value="Generator" />
+                                    <label class="form-check-label">Generator</label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input type="checkbox" class="form-check-input" value="All Time Gas" />
+                                    <label class="form-check-label">All Time Gas</label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input type="checkbox" class="form-check-input" value="Attach Bath" />
+                                    <label class="form-check-label">Attach Bath</label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input type="checkbox" class="form-check-input" value="Attach Balcony" />
+                                    <label class="form-check-label">Attach Balcony</label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input type="checkbox" class="form-check-input" value="Lift" />
+                                    <label class="form-check-label">Lift</label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input type="checkbox" class="form-check-input" value="Wifi/Internet" />
+                                    <label class="form-check-label">Wifi/Internet</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="px-5 py-5">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control" rows="6" placeholder="Write something Details"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group pb-1">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="Enter Email Address" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group pb-1">
+                                <label asp-for="Phone" class="control-label"></label>
+                                <input asp-for="Phone" class="form-control" placeholder="Enter Phone Number" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group float-right pr-5">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.form-check-input').click(function () {
+                var text = "";
+                $('.form-check-input:checked').each(function () {
+                    text += $(this).val() + ', ';
+                });
+                text = text.substring(0, text.length - 1);
+                $("#show").val(text);
+            });
+        });
+    </script>
+}
+

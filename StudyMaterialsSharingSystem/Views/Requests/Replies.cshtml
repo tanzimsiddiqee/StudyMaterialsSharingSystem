@@ -1,0 +1,25 @@
+﻿@model StudyMaterialsSharingSystem.Models.Request
+
+@{
+    ViewData["Title"] = "Replies";
+}
+
+<h1>Replies</h1>
+<table class="table">
+    <tbody>
+            @foreach (var reply in Model.Replies)
+            {
+                <tr>
+                    <td>
+                        <span class="font-weight-bold h6 text-primary">@reply.Sender</span> : <span class="text-dark">@reply.Message</span>
+</td>
+                </tr>
+            }
+
+    </tbody>
+</table>
+<form asp-action="Replies"  method="post">
+    <input type="hidden" name="id" value="@Model.ID" />
+    <textarea class="form-control" name="message" placeholder="Write something" required></textarea>
+    <button type="submit" class="btn btn-xs btn-outline-success mt-2 float-right">Sent</button>
+</form>

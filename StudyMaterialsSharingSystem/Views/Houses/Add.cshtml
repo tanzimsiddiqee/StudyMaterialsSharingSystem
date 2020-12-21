@@ -1,0 +1,171 @@
+﻿@model StudyMaterialsSharingSystem.Models.HouseViewModels.HouseInfoViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body pt-5 px-5">
+            <div class="text-center">
+                <h4 class="text-center">House Information</h4>
+            </div>
+            <form asp-action="Add">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- Nested Row within Card Body -->
+                <div class="row py-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Category" class="control-label"></label>
+                            <select asp-for="Category" class="form-control" asp-items="ViewBag.CategoryID">
+                                <option value="">Select</option>
+                                <option value="Mass">Mass</option>
+                                <option value="Hostel">Hostel</option>
+                                <option value="Sublet">Sublet</option>
+                            </select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HouseType" class="control-label"></label>
+                            </br>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="HouseType" type="radio" class="form-check-input" value="Male" />
+                                <label class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="HouseType" type="radio" class="form-check-input" value="Female" />
+                                <label class="form-check-label">Female</label>
+                            </div>
+                            <span asp-validation-for="HouseType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Location" class="control-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="dateTime" class="control-label"></label>
+                            <input asp-for="dateTime" class="form-control" />
+                            <span asp-validation-for="dateTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group pb-2">
+                            <label asp-for="AvailableSeat" class="control-label"></label>
+                            </br>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="1" />
+                                <label class="form-check-label">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="2" />
+                                <label class="form-check-label">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="3" />
+                                <label class="form-check-label">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="4" />
+                                <label class="form-check-label">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="5" />
+                                <label class="form-check-label">5</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="6" />
+                                <label class="form-check-label">6</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="7" />
+                                <label class="form-check-label">7</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="8" />
+                                <label class="form-check-label">8</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="9" />
+                                <label class="form-check-label">9</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="10" />
+                                <label class="form-check-label">10</label>
+                            </div>
+                            <span asp-validation-for="AvailableSeat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group pb-2">
+                            <label asp-for="AvailableRoom" class="control-label"></label>
+                            </br>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="1" />
+                                <label class="form-check-label">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="2" />
+                                <label class="form-check-label">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="3" />
+                                <label class="form-check-label">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="4" />
+                                <label class="form-check-label">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="5" />
+                                <label class="form-check-label">5</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="6" />
+                                <label class="form-check-label">6</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="7" />
+                                <label class="form-check-label">7</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableSeat" type="radio" class="form-check-input" value="8" />
+                                <label class="form-check-label">8</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="9" />
+                                <label class="form-check-label">9</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="AvailableRoom" type="radio" class="form-check-input" value="10" />
+                                <label class="form-check-label">10</label>
+                            </div>
+                            <span asp-validation-for="AvailableRoom" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label asp-for="RentPerSeat" class="control-label"></label>
+                                <input asp-for="RentPerSeat" class="form-control" />
+                                <span asp-validation-for="RentPerSeat" class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label asp-for="RentPerRoom" class="control-label"></label>
+                                <input asp-for="RentPerRoom" class="form-control" />
+                                <span asp-validation-for="RentPerRoom" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ServiceCharge" class="control-label"></label>
+                            <input asp-for="ServiceCharge" class="form-control" />
+                            <span asp-validation-for="ServiceCharge" class="text-danger"></span>
+                        </div>
+                        <div class="form-group float-right">
+                            <input type="submit" value="Next" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

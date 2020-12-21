@@ -1,0 +1,71 @@
+﻿@model StudyMaterialsSharingSystem.Models.Software
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-6  mx-auto d-block">
+                    <div class="p-5">
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.SoftwareName)</h3>
+                        <div class="item-property">
+                            <p class="price-detail-wrap">
+                                <span class="price font-weight-light text-black-50">
+                                    <span> <i class="far fa-clock"></i> @Html.DisplayFor(model => model.AdTime)</span>
+                                </span>
+                            </p> <!-- price-detail-wrap .// -->
+                        </div>
+                      
+                        <div class="item-property">
+                            <p class="price-detail-wrap">
+                                <span class="price font-weight-bold text-black-50">
+                                    <span> <i class="fas fa-th-large"> Category : </i> @Html.DisplayFor(model => model.SoftwareType.TypeName)</span>
+                                </span>
+                            </p> <!-- price-detail-wrap .// -->
+                        </div>
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.DownloadingProcess)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.DownloadingProcess)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.InstallingProcess)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.InstallingProcess)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <div class="float-right px-3 pb-3">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="SoftwareID" />
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"> Delete</i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!--container.//-->

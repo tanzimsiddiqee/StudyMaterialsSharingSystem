@@ -1,0 +1,182 @@
+﻿@model StudyMaterialsSharingSystem.Models.House
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 mx-auto d-block">
+                    <div class="p-5">
+                        <a target="_blank" href="@Url.Content(Model.ImagePath)">
+                            <img class="img-fluid" src=@Url.Content(Model.ImagePath) alt="Book">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="float-right pl-1">
+                            @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Update)).Succeeded)
+                            {
+                                <a asp-action="Edit" asp-route-id="@Model.HouseID" class=" btn btn-outline-info rounded-circle p-1"><i class="far fa-edit"></i></a>
+                            }
+                            @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Delete)).Succeeded)
+                            {
+                                <a asp-action="Delete" asp-route-id="@Model.HouseID" class="btn btn-outline-danger rounded-circle p-1"><i class="fas fa-trash-alt"></i></a>
+                            }
+                        </div>
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.HouseName)</h3>
+                        <div class="item-property py-2">
+                            <span> <i class="fas fa-th-large"> Category : </i> @Html.DisplayFor(model => model.Category)</span>
+                        </div>
+                        <div class="item-property py-2">
+                            <span> <i class="fas fa-venus-mars"> For :</i> @Html.DisplayFor(model => model.HouseType)</span>
+                        </div>
+                        <div class="item-property py-2">
+                            <span> <i class="fas fa-clock"> From :</i> @Html.DisplayFor(model => model.dateTime)</span>
+                        </div>
+                        <hr>
+                        <div class="item-property">
+                            <div class="row pt-2">
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Available Seat :</span><span class="num"> @Html.DisplayFor(model => model.AvailableSeat)</span>
+                                        </span>
+                                    </p> <!-- price-detail-wrap .// -->
+                                </div> <!-- col.// -->
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Available Room :</span><span class="num"> @Html.DisplayFor(model => model.AvailableRoom)</span>
+                                        </span>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                        </div>
+                        <div class="item-property">
+                            <div class="row pt-2">
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Rent Per Seat :</span><span class="num"> @Html.DisplayFor(model => model.RentPerSeat)</span> <span class="currency"> ৳</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Rent Per Room :</span><span class="num"> @Html.DisplayFor(model => model.RentPerRoom)</span> <span class="currency"> ৳</span>
+                                        </span>
+                                </div>
+                            </div><!-- col.// -->
+                        </div> <!-- row.// -->
+                        <div class="item-property">
+                            <div class="row pt-2">
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Service Charge : </span><span class="num"> @Html.DisplayFor(model => model.ServiceCharge)</span> <span class="currency"> ৳</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div><!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Facilities)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Facilities)
+                                </p>
+                            </dd>
+                        </dl>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="param param-feature">
+                            <dt>Contact Information</dt>
+                            <dd>@Html.DisplayNameFor(model => model.Location) : @Html.DisplayFor(model => model.Location)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => model.Email)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Phone) : @Html.DisplayFor(model => model.Phone)</dd>
+                        </dl>
+                        <hr>
+                        <div class="item-property">
+                            <button type="button" class="btn btn-lg btn-outline-info" data-toggle="modal" data-target="#myModal">
+                                <i class="far fa-envelope"> Request</i>
+                            </button>
+
+                            <!-- The Modal -->
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form asp-action="Sent" asp-route-id="@Model.HouseID" asp-route-receiver="@Model.OwnerID">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Sent Request</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="control-label">Message</label>
+                                                    <textarea class="form-control" name="Message" placeholder="Write something" required></textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary ml-1" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary mr-1">Sent</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- card.// -->
+        </div>
+    </div> <!-- row.// -->
+</div>
+<!--container.//-->
+<div class="card-footer text-center">
+    <div class="list-group-item-action">
+        @if (Model.Status != HouseStatus.Approved)
+        {
+            @if ((await AuthorizationService.AuthorizeAsync(
+        User, Model, Operations.Approve)).Succeeded)
+            {
+                <form style="display:inline;" method="post">
+                    <input type="hidden" name="id" value="@Model.HouseID" />
+                    <input type="hidden" name="status" value="@HouseStatus.Approved" />
+                    <button type="submit" class="btn btn-xs btn-success">Approve</button>
+                </form>
+            }
+        }
+
+        @if (Model.Status != HouseStatus.Rejected)
+        {
+            @if ((await AuthorizationService.AuthorizeAsync(
+        User, Model, Operations.Reject)).Succeeded)
+            {
+                <form style="display:inline;" method="post">
+                    <input type="hidden" name="id" value="@Model.HouseID" />
+                    <input type="hidden" name="status" value="@HouseStatus.Rejected" />
+                    <button type="submit" class="btn btn-xs btn-success">Reject</button>
+                </form>
+            }
+        }
+
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

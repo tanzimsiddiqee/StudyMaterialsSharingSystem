@@ -1,0 +1,108 @@
+﻿@model StudyMaterialsSharingSystem.Models.Software
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5  mx-auto d-block">
+                    <div class="p-5">
+                        <div class="float-right pl-1">
+                            @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Update)).Succeeded)
+                            {
+                                <a asp-action="Edit" asp-route-id="@Model.SoftwareID" class=" btn btn-outline-info rounded-circle p-1"><i class="far fa-edit"></i></a>
+                            }
+                            @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Delete)).Succeeded)
+                            {
+                                <a asp-action="Delete" asp-route-id="@Model.SoftwareID" class="btn btn-outline-danger rounded-circle p-1"><i class="fas fa-trash-alt"></i></a>
+                            }
+                        </div>
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.SoftwareName)</h3>
+                        <div class="item-property">
+                            <p class="price-detail-wrap">
+                                <span class="price font-weight-light text-black-50">
+                                    <span> <i class="far fa-clock"></i> @Html.DisplayFor(model => model.AdTime)</span>
+                                </span>
+                            </p> <!-- price-detail-wrap .// -->
+                        </div>
+
+                        <div class="item-property">
+                            <p class="price-detail-wrap">
+                                <span class="price font-weight-bold text-black-50">
+                                    <span> <i class="fas fa-th-large"> Category : </i> @Html.DisplayFor(model => model.SoftwareType.TypeName)</span>
+                                </span>
+                            </p> <!-- price-detail-wrap .// -->
+                        </div>
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.DownloadingProcess)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.DownloadingProcess)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.InstallingProcess)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.InstallingProcess)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <div class="item-property">
+                            <a href="@Url.Content(Model.DownloadAddress)" class="btn btn-lg btn-primary"><i class="fas fa-cloud-download-alt"> DownLoad</i></a>
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </div> <!-- card.// -->
+            </div>
+        </div> <!-- row.// -->
+    </div>
+</div> <!--container.//-->
+<div class="card-footer text-center">
+    <div class="list-group-item-action">
+        @if (Model.Status != SoftStatus.Approved)
+        {
+            @if ((await AuthorizationService.AuthorizeAsync(
+        User, Model, Operations.Approve)).Succeeded)
+            {
+                <form style="display:inline;" method="post">
+                    <input type="hidden" name="id" value="@Model.SoftwareID" />
+                    <input type="hidden" name="status" value="@SoftStatus.Approved" />
+                    <button type="submit" class="btn btn-xs btn-success">Approve</button>
+                </form>
+            }
+        }
+
+        @if (Model.Status != SoftStatus.Rejected)
+        {
+            @if ((await AuthorizationService.AuthorizeAsync(
+        User, Model, Operations.Reject)).Succeeded)
+            {
+                <form style="display:inline;" method="post">
+                    <input type="hidden" name="id" value="@Model.SoftwareID" />
+                    <input type="hidden" name="status" value="@SoftStatus.Rejected" />
+                    <button type="submit" class="btn btn-xs btn-success">Reject</button>
+                </form>
+            }
+        }
+            <a asp-action="Index">Back to List</a>
+
+    </div>
+</div>

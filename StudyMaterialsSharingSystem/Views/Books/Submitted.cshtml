@@ -1,0 +1,98 @@
+﻿@model PaginatedList<StudyMaterialsSharingSystem.Models.Book>
+
+@{
+    ViewData["Title"] = "Submitted";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="font-weight-bold h4 text-info mx-auto d-block pb-2">Books</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Sort By @ViewData["SortStatus"]
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-action="Submitted" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name @ViewData["ChangeSort1"]</a>
+                        <a class="dropdown-item" asp-action="Submitted" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Price @ViewData["ChangeSort2"]</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <form asp-action="Submitted" method="get">
+                    <div class="form-actions no-color">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="SearchString" value="@ViewData["currentFilter"]" placeholder="Search.." />
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <a asp-action="Submitted" class="btn btn-info">Back to Full List</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            @foreach (var item in Model)
+            {<div class="col-lg-3 col-md-5 col-sm-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <a asp-action="Details" asp-route-id="@item.BookID" class="btn btn-link p-0">
+                                <h6 class="m-0 font-weight-bold text-primary">@item.BookName</h6>
+                            </a>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-header">Action</div>
+                                    @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Update)).Succeeded)
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.BookID" class="dropdown-item">Edit</a>
+                                    }
+
+                                    @if ((await AuthorizationService.AuthorizeAsync(User, item, Operations.Delete)).Succeeded)
+                                    {
+                                        <a asp-action="Delete" asp-route-id="@item.BookID" class="dropdown-item">Delete</a>
+                                    }
+
+                                    @*<div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Report</a>*@
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body pt-3">
+                            <img class="mx-auto d-block" src=@Url.Content(item.ImagePath) alt="Book" width="174" height="120">
+                            <div class="mt-2 text-center small">
+                                <div class="card-text text-lg-center text-info">Condition : @item.Condition</div>
+                                <div class="card-text text-lg-center text-info">Price : @item.Price</div>
+                                <span>
+                                    <i class="fas fa-circle text-info"></i> Status : @item.Status
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <div class="card-body">
+        <a asp-action="Submitted" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary @prevDisabled">Previous</a>
+        <a asp-action="Submitted" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-info @nextDisabled">Next</a>
+    </div>
+</div>

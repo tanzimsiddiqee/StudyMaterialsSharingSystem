@@ -1,0 +1,278 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h3 class="h3 mb-0 text-gray-800 font-weight-bold">Dashboard</h3>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h3 class="h5 mb-0 text-gray-800 font-weight-bold">Materials :</h3>
+</div>
+<!-- Content Row -->
+<div class="row">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-controller="Books" asp-action="Index" class="list-group-item-action">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Books (Total)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">#@ViewBag.Books</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-book-open fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-controller="Documents" asp-action="Index" class="list-group-item-action">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Documents (Total)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">#@ViewBag.Documents</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-pdf fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-controller="Softwares" asp-action="Index" class="list-group-item-action">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Softwares (Total)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">#@ViewBag.Softwares</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-download fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-controller="Books" asp-action="Index" class="list-group-item-action">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Houses (Total)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">#@ViewBag.Houses</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-house-damage fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <!-- Content Column -->
+    <div class="col-lg-6 mb-2">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Books</h6>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a asp-controller="Books" asp-action="Index" class="list-group-item-action">
+                        <h4 class="small font-weight-bold">Total (@ViewBag.Books)<span class="float-right">100%</span></h4>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                    <a asp-controller="Books" asp-action="Index" class="list-group-item-action">
+                        <h4 class="small font-weight-bold">Approved (@ViewBag.approvedBooks)<span class="float-right">@ViewBag.BAPercent%</span></h4>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-gradient-success" role="progressbar" style="width: @ViewBag.BAPercent%" aria-valuenow="@ViewBag.BAPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                    <a asp-controller="Books" asp-action="Rejected" class="list-group-item-action">
+                        <h4 class="small font-weight-bold">Rejected (@ViewBag.rejectedBooks)<span class="float-right">@ViewBag.BRPercent%</span></h4>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-gradient-danger" role="progressbar" style="width:  @ViewBag.BRPercent%" aria-valuenow="@ViewBag.BRPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                    <a asp-controller="Books" asp-action="Submitted" class="list-group-item-action">
+                        <h4 class="small font-weight-bold">Submitted (@ViewBag.submittedBooks)<span class="float-right">@ViewBag.BSPercent%</span></h4>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: @ViewBag.BSPercent%" aria-valuenow=" @ViewBag.BSPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-2">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Documents</h6>
+            </div>
+            <div class="card-body">
+                <a asp-controller="Documents" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Total (@ViewBag.Documents)<span class="float-right">100%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Documents" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Approved (@ViewBag.approvedDocuments)<span class="float-right">@ViewBag.DAPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-success" role="progressbar" style="width: @ViewBag.DAPercent%" aria-valuenow="@ViewBag.DAPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Documents" asp-action="Rejected" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Rejected (@ViewBag.rejectedDocuments)<span class="float-right">@ViewBag.DRPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-danger" role="progressbar" style="width:  @ViewBag.DRPercent%" aria-valuenow="@ViewBag.DRPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Documents" asp-action="Submitted" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Submitted (@ViewBag.submittedDocuments)<span class="float-right">@ViewBag.DSPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: @ViewBag.DSPercent%" aria-valuenow="@ViewBag.DSPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content Row -->
+<div class="row">
+    <!-- Content Column -->
+    <div class="col-lg-6 mb-2">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Softwares</h6>
+            </div>
+            <div class="card-body">
+                <a asp-controller="Softwares" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Total (@ViewBag.Softwares)<span class="float-right">100%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Softwares" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Approved (@ViewBag.approvedSoftwares)<span class="float-right">@ViewBag.SAPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-success" role="progressbar" style="width: @ViewBag.SAPercent%" aria-valuenow="@ViewBag.SAPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Softwares" asp-action="Rejected" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Rejected (@ViewBag.rejectedSoftwares)<span class="float-right">@ViewBag.SRPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-danger" role="progressbar" style="width:  @ViewBag.SRPercent%" aria-valuenow="@ViewBag.SRPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Softwares" asp-action="Submitted" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Submitted (@ViewBag.submittedSoftwares)<span class="float-right">@ViewBag.SSPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: @ViewBag.SSPercent%" aria-valuenow="@ViewBag.SSPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-2">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Houses</h6>
+            </div>
+            <div class="card-body">
+                <a asp-controller="Houses" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Total (@ViewBag.Houses)<span class="float-right">100%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Houses" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Approved (@ViewBag.approvedHouses)<span class="float-right">@ViewBag.HAPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-success" role="progressbar" style="width: @ViewBag.HAPercent%" aria-valuenow="@ViewBag.HAPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Houses" asp-action="Rejected" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Rejected (@ViewBag.rejectedHouses)<span class="float-right">@ViewBag.HRPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-danger" role="progressbar" style="width:  @ViewBag.HRPercent%" aria-valuenow="@ViewBag.HRPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Houses" asp-action="Submitted" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Submitted (@ViewBag.submittedHouses)<span class="float-right">@ViewBag.HSPercent%</span></h4>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: @ViewBag.HSPercent%" aria-valuenow="@ViewBag.HSPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="sidebar-divider">
+
+<!-- Content Row -->
+<div class="row">
+    <!-- Content Column -->
+    <div class="col-lg-12 mb-4">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Materials</h6>
+            </div>
+            <div class="card-body">
+                <h4 class="small font-weight-bold">Materials (@ViewBag.total)<span class="float-right">Total 100%</span></h4>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <a asp-controller="Books" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Books (@ViewBag.Books)<span class="float-right">@ViewBag.BPercent%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-gradient-info" role="progressbar" style="width: @ViewBag.BPercent%" aria-valuenow=" @ViewBag.BPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Documents" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Documents (@ViewBag.Documents)<span class="float-right">@ViewBag.DPercent%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: @ViewBag.DPercent%" aria-valuenow="@ViewBag.DPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Softwares" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Softwares (@ViewBag.Softwares)<span class="float-right">@ViewBag.SPercent%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: @ViewBag.SPercent%" aria-valuenow="@ViewBag.SPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+                <a asp-controller="Houses" asp-action="Index" class="list-group-item-action">
+                    <h4 class="small font-weight-bold">Houses (@ViewBag.Houses)<span class="float-right">@ViewBag.HPercent%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: @ViewBag.HPercent%" aria-valuenow="@ViewBag.HPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

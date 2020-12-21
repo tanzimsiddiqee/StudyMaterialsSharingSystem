@@ -1,0 +1,115 @@
+﻿@model StudyMaterialsSharingSystem.Models.House
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 mx-auto d-block">
+                    <div class="p-5">
+                        <a target="_blank" href="@Url.Content(Model.ImagePath)">
+                            <img class="img-fluid" src=@Url.Content(Model.ImagePath) alt="Book">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <h3 class="title my-3"> @Html.DisplayFor(model => model.HouseName)</h3>
+                        <div class="item-property py-2">
+                            <span> <i class="fas fa-th-large"> Category : </i> @Html.DisplayFor(model => model.Category)</span>
+                        </div>
+                        <div class="item-property py-2">
+                            <span> <i class="fas fa-venus-mars"> For :</i> @Html.DisplayFor(model => model.HouseType)</span>
+                        </div>
+                        <div class="item-property py-2">
+                            <span> <i class="fas fa-clock"> From :</i> @Html.DisplayFor(model => model.dateTime)</span>
+                        </div>
+                        <hr>
+                        <div class="item-property">
+                            <div class="row pt-2">
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Available Seat :</span><span class="num"> @Html.DisplayFor(model => model.AvailableSeat)</span>
+                                        </span>
+                                    </p> <!-- price-detail-wrap .// -->
+                                </div> <!-- col.// -->
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Available Room :</span><span class="num"> @Html.DisplayFor(model => model.AvailableRoom)</span>
+                                        </span>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                        </div>
+                        <div class="item-property">
+                            <div class="row pt-2">
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Rent Per Seat :</span><span class="num"> @Html.DisplayFor(model => model.RentPerSeat)</span> <span class="currency"> ৳</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Rent Per Room :</span><span class="num"> @Html.DisplayFor(model => model.RentPerRoom)</span> <span class="currency"> ৳</span>
+                                        </span>
+                                </div>
+                            </div><!-- col.// -->
+                        </div> <!-- row.// -->
+                        <div class="item-property">
+                            <div class="row pt-2">
+                                <div class="col-sm-6">
+                                    <p class="price-detail-wrap">
+                                        <span class="price font-weight-bold text-black-50">
+                                            <span class="currency">Service Charge : </span><span class="num"> @Html.DisplayFor(model => model.ServiceCharge)</span> <span class="currency"> ৳</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div><!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Facilities)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Facilities)
+                                </p>
+                            </dd>
+                        </dl>
+                        <dl class="item-property">
+                            <dt> @Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd>
+                                <p>
+                                    @Html.DisplayFor(model => model.Description)
+                                </p>
+                            </dd>
+                        </dl>
+                        <hr>
+                        <dl class="param param-feature">
+                            <dt>Contact Information</dt>
+                            <dd>@Html.DisplayNameFor(model => model.Location) : @Html.DisplayFor(model => model.Location)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => model.Email)</dd>
+                            <dd>@Html.DisplayNameFor(model => model.Phone) : @Html.DisplayFor(model => model.Phone)</dd>
+                        </dl>
+                        <hr>
+                        <div class="float-right px-3 pb-3">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="HouseID" />
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"> Delete</i></button>
+                            </form>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- card.// -->
+        </div>
+    </div> <!-- row.// -->
+</div>
+<!--container.//-->
