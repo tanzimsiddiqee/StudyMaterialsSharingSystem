@@ -4,27 +4,7 @@
     ViewData["Title"] = "Access denied";
 }
 
-<div class="container-fluid">
-           <!-- 404 Error Text -->
-        <div class="text-center">
-            <div class="error mx-auto" data-text="401">401</div>
-            <p class="lead text-gray-800 mb-5">Access Denied</p>
-            <hr />
-            <p class="text-gray-500 mb-0">Access Denied: We are not  your track. Please go to your track</p>
-         <br />
-            <a href="javascript:void(0)" onClick="backAway()" class="btn btn-success">Back</a>
-        </div>
-    </div>
-
-@section scripts
-    {
-    <script>
-        function backAway() {
-            if (history.length === 1) {
-                window.location = "http://localhost:44390/"
-            } else {
-                history.back();
-            }
-        }
-    </script>
-}
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">You do not have access to this resource.</p>
+</header>

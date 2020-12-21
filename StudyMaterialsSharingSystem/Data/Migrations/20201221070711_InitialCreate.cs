@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudyMaterialsSharingSystem.Data.Migrations
@@ -12,10 +11,10 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,23 +25,23 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    DOB = table.Column<DateTime>(nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,9 +52,9 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoryName = table.Column<string>(nullable: true)
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,15 +65,15 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Documents",
                 columns: table => new
                 {
-                    DocumentID = table.Column<string>(nullable: false),
-                    DocumentName = table.Column<string>(nullable: true),
-                    DocumentFormat = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
-                    OwnerID = table.Column<string>(nullable: true),
-                    DownloadAddress = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    AdTime = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    DocumentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DocumentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DocumentFormat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DownloadAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,11 +84,11 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    ID = table.Column<string>(nullable: false),
-                    User = table.Column<string>(nullable: true),
-                    Comment = table.Column<string>(nullable: true),
-                    dateTime = table.Column<DateTime>(nullable: false),
-                    Read = table.Column<bool>(nullable: false)
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    User = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Read = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,25 +99,25 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Houses",
                 columns: table => new
                 {
-                    HouseID = table.Column<string>(nullable: false),
-                    HouseName = table.Column<string>(nullable: true),
-                    Category = table.Column<string>(nullable: true),
-                    HouseType = table.Column<string>(nullable: true),
-                    Location = table.Column<string>(nullable: true),
-                    dateTime = table.Column<DateTime>(nullable: false),
-                    AvailableSeat = table.Column<string>(nullable: true),
-                    AvailableRoom = table.Column<string>(nullable: true),
-                    RentPerSeat = table.Column<string>(nullable: true),
-                    RentPerRoom = table.Column<string>(nullable: true),
-                    ServiceCharge = table.Column<string>(nullable: true),
-                    Facilities = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
-                    OwnerID = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    AdTime = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    HouseID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    HouseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HouseType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AvailableSeat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AvailableRoom = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RentPerSeat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RentPerRoom = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceCharge = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Facilities = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -129,14 +128,13 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Requests",
                 columns: table => new
                 {
-                    ID = table.Column<string>(nullable: false),
-                    MaterialID = table.Column<string>(nullable: true),
-                    Material = table.Column<string>(nullable: true),
-                    Sender = table.Column<string>(nullable: true),
-                    Receiver = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true),
-                    Read = table.Column<bool>(nullable: false),
-                    dateTime = table.Column<DateTime>(nullable: false)
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaterialID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Receiver = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Read = table.Column<bool>(type: "bit", nullable: false),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,9 +145,9 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "SoftwareTypes",
                 columns: table => new
                 {
-                    TypeID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TypeName = table.Column<string>(nullable: true)
+                    TypeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -160,11 +158,11 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -181,11 +179,11 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,10 +200,10 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,8 +220,8 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,10 +244,10 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -266,10 +264,10 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "SubCategories",
                 columns: table => new
                 {
-                    SubCategoryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    SubCategoryName = table.Column<string>(nullable: true),
-                    CategoryID = table.Column<int>(nullable: false)
+                    SubCategoryID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,11 +284,11 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Replies",
                 columns: table => new
                 {
-                    ID = table.Column<string>(nullable: false),
-                    Sender = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true),
-                    dateTime = table.Column<DateTime>(nullable: false),
-                    RequestID = table.Column<string>(nullable: true)
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RequestID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -307,18 +305,18 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Softwares",
                 columns: table => new
                 {
-                    SoftwareID = table.Column<string>(nullable: false),
-                    SoftwareName = table.Column<string>(nullable: true),
-                    Version = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    OwnerID = table.Column<string>(nullable: true),
-                    DownloadAddress = table.Column<string>(nullable: true),
-                    DownloadingProcess = table.Column<string>(nullable: true),
-                    InstallingProcess = table.Column<string>(nullable: true),
-                    AdTime = table.Column<DateTime>(nullable: false),
-                    SoftwareTypeID = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    SoftwareID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SoftwareName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Version = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DownloadAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DownloadingProcess = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InstallingProcess = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SoftwareTypeID = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -335,20 +333,20 @@ namespace StudyMaterialsSharingSystem.Data.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    BookID = table.Column<string>(nullable: false),
-                    BookName = table.Column<string>(nullable: true),
-                    Condition = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    OwnerID = table.Column<string>(nullable: true),
-                    Price = table.Column<string>(nullable: true),
-                    PriceType = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    Location = table.Column<string>(nullable: true),
-                    AdTime = table.Column<DateTime>(nullable: false),
-                    SubCategoryID = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    BookID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BookName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Condition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PriceType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SubCategoryID = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

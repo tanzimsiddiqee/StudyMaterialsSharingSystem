@@ -22,12 +22,12 @@ namespace StudyMaterialsSharingSystem.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAuthorizationService _authorizationService;
         private readonly ApplicationDbContext _context;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
         public SoftwaresController(
             UserManager<ApplicationUser> userManager, 
             IAuthorizationService authorizationService, 
-            ApplicationDbContext context, IHostingEnvironment env)
+            ApplicationDbContext context, IWebHostEnvironment env)
         {
             _userManager = userManager;
             _authorizationService = authorizationService;
